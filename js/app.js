@@ -1,5 +1,6 @@
 function drawProducts(data) {
   let products = data.products;
+  console.log(products)
   let productsContainer = document.getElementById("products-container");
   products.forEach((product, index) => {
     let productHTML = createProductHTML(product);
@@ -27,17 +28,19 @@ function createProductHTML(product) {
 
 drawProducts(data);
 
-function addToCart() {
+let arraySelectProduct = [];
+function addToCart(product) {
   /* cuando agrego a carrito, tengo que:
   1) Incrementar en uno mi contador del menu
   2) Guardar mi producto en algun lugar
+  2.1 Guardar el objeto del producto seleccionado (por su id) en un array y a ese array hacerle el localstorage
   3) Cambiar el boton de agregar a carrito
   por quitar del carrito
   */
 }
 
 function removeFromCart() {
-  /* cuando agrego a carrito, tengo que:
+  /* cuando borro del carrito, tengo que:
   1) Decrementar en uno mi contador del menu
   2) Borrar mi producto de algun lugar
   3) Cambiar el boton de quitar del carrito
@@ -48,6 +51,10 @@ function removeFromCart() {
 function increaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
+  
+  //traer contador
+ let counterCart = document.getElementById("counterItems");
+ counterCart = 0
 }
 
 function decreaseCounter() {
