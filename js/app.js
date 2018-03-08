@@ -1,3 +1,5 @@
+let counterCart = document.getElementById("counterItems");
+
 function drawProducts(data) {
   let products = data.products;
   console.log(products)
@@ -20,6 +22,7 @@ function createProductHTML(product) {
       </button>
     <hr/>
   `;
+
   let productContainer = document.createElement("div");
   productContainer.className = "col text-center";
   productContainer.innerHTML = template;
@@ -32,15 +35,14 @@ const arrayId = [];
 
 function addToCart(product) {
 arrayId.push(product);
+console.log(product)
 
 //se cinvierte el array a string
 let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
 
 console.log(JSON.parse(localStorage.getItem(("productSelect"))));
-
 increaseCounter();
-
-
+changeButtonStatus(product)
 
   /* cuando agrego a carrito, tengo que:
   1) Incrementar en uno mi contador del menu
@@ -64,15 +66,14 @@ function increaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
   
-  //traer contador
- let counterCart = document.getElementById("counterItems");
- counterCart = 0
- 
+  counterCart.innerHTML++;
+
 }
 
 function decreaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
+  counterCart.innerHTML--;
 }
 
 function changeButtonStatus(button) {
@@ -82,4 +83,13 @@ function changeButtonStatus(button) {
       cambia el texto a quitar del carrito
     Y viceversa
   */
+//button.innerText
+let text = event.target
+
+console.log(text)
+//if (button.innerText == "Agregar a carrito") 
+
+
+ //button = "Agregar a carrito"
+ //button = (button.innerText == "Agregar a carrito") ? "Agregar a carrito" : button.innerText = "Quitar del carrito"
 }
