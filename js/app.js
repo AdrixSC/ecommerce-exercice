@@ -30,7 +30,10 @@ function createProductHTML(product) {
 drawProducts(data);
 
 const arrayId = [];
+
 function addToCart(product) {
+  // console.log(product);
+  
 arrayId.push(product);
 
 //se cinvierte el array a string
@@ -38,6 +41,10 @@ let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arr
 
 console.log(JSON.parse(localStorage.getItem(("productSelect"))));
 increaseCounter();
+
+// console.log(button);
+
+changeButtonStatus(product);
 
 
   /* cuando agrego a carrito, tengo que:
@@ -61,7 +68,6 @@ function removeFromCart() {
 function increaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
-  
   counterCart.innerHTML++;
 }
 
@@ -72,6 +78,15 @@ function decreaseCounter() {
 }
 
 function changeButtonStatus(button) {
+  let text = event.target;
+  if (text.innerText) {
+    text.innerText = "quitar del carrito"
+  } else {
+    text;
+  }
+  
+  
+  
   /* esta funcion deberia recibir un boton y
   cambiar su estatus
     Si el boton esta en agregar al carrito
