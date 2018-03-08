@@ -27,14 +27,25 @@ function createProductHTML(product) {
 
 drawProducts(data);
 
-function addToCart() {
+const arrayId = [];
+function addToCart(product) {
+arrayId.push(product);
+
+//se cinvierte el array a string
+let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
+
+console.log(JSON.parse(localStorage.getItem(("productSelect"))));
+
+
+
   /* cuando agrego a carrito, tengo que:
   1) Incrementar en uno mi contador del menu
-  2) Guardar mi producto en algun lugar
+  2) Guardar mi producto en algun lugar (arreglo)
   3) Cambiar el boton de agregar a carrito
   por quitar del carrito
   */
 }
+
 
 function removeFromCart() {
   /* cuando agrego a carrito, tengo que:
