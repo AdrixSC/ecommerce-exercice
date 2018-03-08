@@ -1,3 +1,5 @@
+let counterCart = document.getElementById("counterItems");
+
 function drawProducts(data) {
   let products = data.products;
   let productsContainer = document.getElementById("products-container");
@@ -35,7 +37,7 @@ arrayId.push(product);
 let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
 
 console.log(JSON.parse(localStorage.getItem(("productSelect"))));
-
+increaseCounter();
 
 
   /* cuando agrego a carrito, tengo que:
@@ -59,11 +61,14 @@ function removeFromCart() {
 function increaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
+  
+  counterCart.innerHTML++;
 }
 
 function decreaseCounter() {
   /* como accedemos al HTML del contador
   y como lo incrementamos*/
+  counterCart.innerHTML--;
 }
 
 function changeButtonStatus(button) {
