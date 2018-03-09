@@ -48,22 +48,17 @@ return arrayId;
 };
 
 const removeFromCart = (product) => {
-
+  arrayId.pop(product);
+  console.log(arrayId, "arraY");
+console.log(product, "si entra")
 let removeArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
-JSON.parse(localStorage.removeItem(("productSelect")));
-console.log(arrayId, "arraY");
-console.log(array);
-arrayId.pop(array);
-console.log(arrayId);
+JSON.parse(localStorage.removeItem((product)));
 
-//addToCart(product)
+//console.log(array);
+
 decreaseCounter();
 changeButtonStatus(product);
 };
-
-//removeFromCart(product)
-
-
 
 const increaseCounter = () => {
   let counterCart = document.getElementById("counterItems");
@@ -77,9 +72,11 @@ const decreaseCounter = () => {
 
 const changeButtonStatus = (button) => {
   let text = event.target;
-  if (text.innerText) {
+  if (text.innerText == "Agregar a carrito") {
     text.innerText = "Quitar del carrito"
+    //removeFromCart(button);
   } else {
     text.innerText = "Agregar a carrito"
+    removeFromCart(button);
   };
 };
