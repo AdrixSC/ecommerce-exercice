@@ -1,13 +1,14 @@
-function drawProducts(data) {
+const drawProducts = (data) => {
   let products = data.products;
+  console.log(products)
   let productsContainer = document.getElementById("products-container");
   products.forEach((product, index) => {
     let productHTML = createProductHTML(product);
     productsContainer.appendChild(productHTML);
   });
-}
+};
 
-function createProductHTML(product) {
+const createProductHTML = (product) => {
   let template = `
     <h3>${product.title}</h3>
     <img src='${product.imageUrl}' alt='${product.description}'/>
@@ -19,47 +20,63 @@ function createProductHTML(product) {
       </button>
     <hr/>
   `;
+
   let productContainer = document.createElement("div");
   productContainer.className = "col text-center";
   productContainer.innerHTML = template;
   return productContainer;
-}
+};
 
 drawProducts(data);
 
-function addToCart() {
-  /* cuando agrego a carrito, tengo que:
-  1) Incrementar en uno mi contador del menu
-  2) Guardar mi producto en algun lugar
-  3) Cambiar el boton de agregar a carrito
-  por quitar del carrito
-  */
-}
+//array para agregar productos
+const arrayId = [];
 
-function removeFromCart() {
-  /* cuando agrego a carrito, tengo que:
-  1) Decrementar en uno mi contador del menu
-  2) Borrar mi producto de algun lugar
-  3) Cambiar el boton de quitar del carrito
-  por agregar a carrito
-  */
-}
+const addToCart = (product) => {
+arrayId.push(product);
+//console.log(product)
 
-function increaseCounter() {
-  /* como accedemos al HTML del contador
-  y como lo incrementamos*/
-}
+//se convierte el array a string
+let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
+JSON.parse(localStorage.getItem(("productSelect")));
 
-function decreaseCounter() {
-  /* como accedemos al HTML del contador
-  y como lo incrementamos*/
-}
+//llamando a las funciones que dependen de esta
+increaseCounter();
+changeButtonStatus(product);
+console.log(arrayId)
+return arrayId;
+};
 
-function changeButtonStatus(button) {
-  /* esta funcion deberia recibir un boton y
-  cambiar su estatus
-    Si el boton esta en agregar al carrito
-      cambia el texto a quitar del carrito
-    Y viceversa
-  */
-}
+const removeFromCart = (product) => {
+  arrayId.pop(product);
+  console.log(arrayId, "arraY");
+console.log(product, "si entra")
+let removeArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
+JSON.parse(localStorage.removeItem((product)));
+
+//console.log(array);
+
+decreaseCounter();
+changeButtonStatus(product);
+};
+
+const increaseCounter = () => {
+  let counterCart = document.getElementById("counterItems");
+  counterCart.innerHTML++;
+};
+
+const decreaseCounter = () => {
+  let counterCart = document.getElementById("counterItems");
+  counterCart.innerHTML--;
+};
+
+const changeButtonStatus = (button) => {
+  let text = event.target;
+  if (text.innerText == "Agregar a carrito") {
+    text.innerText = "Quitar del carrito"
+    //removeFromCart(button);
+  } else {
+    text.innerText = "Agregar a carrito"
+    removeFromCart(button);
+  };
+};
