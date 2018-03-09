@@ -1,6 +1,4 @@
-let counterCart = document.getElementById("counterItems");
-
-function drawProducts(data) {
+const drawProducts = (data) => {
   let products = data.products;
   console.log(products)
   let productsContainer = document.getElementById("products-container");
@@ -8,9 +6,9 @@ function drawProducts(data) {
     let productHTML = createProductHTML(product);
     productsContainer.appendChild(productHTML);
   });
-}
+};
 
-function createProductHTML(product) {
+const createProductHTML = (product) => {
   let template = `
     <h3>${product.title}</h3>
     <img src='${product.imageUrl}' alt='${product.description}'/>
@@ -27,69 +25,61 @@ function createProductHTML(product) {
   productContainer.className = "col text-center";
   productContainer.innerHTML = template;
   return productContainer;
-}
+};
 
 drawProducts(data);
 
+//array para agregar productos
 const arrayId = [];
 
-function addToCart(product) {
+const addToCart = (product) => {
 arrayId.push(product);
-console.log(product)
+//console.log(product)
 
-//se cinvierte el array a string
+//se convierte el array a string
 let saveArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
+JSON.parse(localStorage.getItem(("productSelect")));
 
-console.log(JSON.parse(localStorage.getItem(("productSelect"))));
+//llamando a las funciones que dependen de esta
 increaseCounter();
-changeButtonStatus(product)
+changeButtonStatus(product);
+console.log(arrayId)
+return arrayId;
+};
 
-  /* cuando agrego a carrito, tengo que:
-  1) Incrementar en uno mi contador del menu
-  2) Guardar mi producto en algun lugar (arreglo)
-  3) Cambiar el boton de agregar a carrito
-  por quitar del carrito
-  */
-}
+const removeFromCart = (product) => {
+
+let removeArrayProducts = localStorage.setItem("productSelect", JSON.stringify(arrayId));
+JSON.parse(localStorage.removeItem(("productSelect")));
+console.log(arrayId, "arraY");
+console.log(array);
+arrayId.pop(array);
+console.log(arrayId);
+
+//addToCart(product)
+decreaseCounter();
+changeButtonStatus(product);
+};
+
+//removeFromCart(product)
 
 
-function removeFromCart() {
-  /* cuando borro del carrito, tengo que:
-  1) Decrementar en uno mi contador del menu
-  2) Borrar mi producto de algun lugar
-  3) Cambiar el boton de quitar del carrito
-  por agregar a carrito
-  */
-}
 
-function increaseCounter() {
-  /* como accedemos al HTML del contador
-  y como lo incrementamos*/
-  
+const increaseCounter = () => {
+  let counterCart = document.getElementById("counterItems");
   counterCart.innerHTML++;
+};
 
-}
-
-function decreaseCounter() {
-  /* como accedemos al HTML del contador
-  y como lo incrementamos*/
+const decreaseCounter = () => {
+  let counterCart = document.getElementById("counterItems");
   counterCart.innerHTML--;
-}
+};
 
-function changeButtonStatus(button) {
-  /* esta funcion deberia recibir un boton y
-  cambiar su estatus
-    Si el boton esta en agregar al carrito
-      cambia el texto a quitar del carrito
-    Y viceversa
-  */
-//button.innerText
-let text = event.target
-
-console.log(text)
-//if (button.innerText == "Agregar a carrito") 
-
-
- //button = "Agregar a carrito"
- //button = (button.innerText == "Agregar a carrito") ? "Agregar a carrito" : button.innerText = "Quitar del carrito"
-}
+const changeButtonStatus = (button) => {
+  let text = event.target;
+  if (text.innerText) {
+    text.innerText = "Quitar del carrito"
+  } else {
+    text.innerText = "Agregar a carrito"
+  };
+};
